@@ -1,0 +1,9 @@
+- name: Find existing instance
+  hosts: "tag_Name_ansible_aws_demo_2"
+  gather_facts: false
+  tags: find
+  tasks:
+    - name: Add to existing_ansible_aws_demo_2
+      group_by:
+        key: existing_ansible_aws_demo_2
+

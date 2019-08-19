@@ -1,0 +1,16 @@
+---
+# roles/delete-old-amis/tasks/main.yml
+- name: gather facts about an AMI with AMI Name webapp
+  ec2_ami_find:
+    region: "{{ region }}"
+    name: "webapp-*"
+    sort: name
+  register: existing_amis
+
+- ec2_ami:
+    region: "{{ region }}"
+    image_id: "{{ item.ami_id }}"
+    delete_snapshot: yes
+    state: absent
+  with_items: existing_amis.results[0][0]
+  ignore_errors: yes

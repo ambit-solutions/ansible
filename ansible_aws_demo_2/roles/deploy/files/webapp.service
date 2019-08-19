@@ -1,0 +1,11 @@
+[Unit]
+Description=Job that runs your user script
+
+[Service]
+Environment="IP=127.0.0.1" "NODE_ENV=production"
+ExecStart=node /srv/www/webapp/app.js
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

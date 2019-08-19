@@ -1,0 +1,29 @@
+---
+# deploy.yml
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: terminateInstance
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: launch
+      name: ansible_aws_demo_2_live
+
+- hosts: ansible_aws_demo_2_live
+  roles:
+    - deploy
+    - nginx
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - createAMI
+    - createLC
+    - createELB
+    - createASG

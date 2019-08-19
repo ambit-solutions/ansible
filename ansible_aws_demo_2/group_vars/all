@@ -1,0 +1,15 @@
+---
+keypair: ansible_aws_demo_2
+keyfile: /opt/cloud/git/repos/ansible/ansible_aws_demo_2/keys/ansible_aws_demo_2
+region: us-east-2
+zone: us-east-2a
+vpc_id: vpc-319d8959
+ami_id: ami-af122bca
+instance_type: t2.micro
+name: ansible_aws_demo_2
+volumes:
+  - device_name: /dev/sda1
+    device_type: gp2
+    volume_size: 20
+    delete_on_termination: true
+
