@@ -25,6 +25,9 @@
     dest: /home/ubuntu/www/webapp
     version: master
 
+- name: Curl NodeSource repo
+  shell: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
 - name: Install legacy node
   apt:
     pkg: nodejs
@@ -32,12 +35,13 @@
     force: yes
   become: yes
 
-- name: Install node pm
+- name: Install node package manager
   apt:
     pkg: npm
     state: present
     force: yes
   become: yes
+  ignore_errors: yes
 
 - name: Install node express
   shell: npm install express

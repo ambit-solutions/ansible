@@ -23,6 +23,7 @@
       - proto: tcp
         ports:
         - 80
+        - 22
         cidr_ip: 0.0.0.0/0
         rule_desc: allow all on port 80
 
@@ -51,7 +52,7 @@
   wait_for:
     host: "{{ item.public_dns_name }}"
     port: 22
-    delay: 30
-    timeout: 300
+    delay: 5
+    timeout: 120
     state: started
   with_items: "{{ ec2.instances }}"

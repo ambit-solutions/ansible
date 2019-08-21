@@ -12,9 +12,9 @@
   gather_facts: no
   roles:
     - role: launch
-      name: ansible_aws_demo_2_live
+      name: ansible_aws_demo_2
 
-- hosts: ansible_aws_demo_2_live
+- hosts: ansible_aws_demo_2
   roles:
     - deploy
     - nginx
