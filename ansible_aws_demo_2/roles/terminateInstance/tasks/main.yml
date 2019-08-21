@@ -1,5 +1,10 @@
-- name: Gather EC2 facts
+---
+# roles/terminateInstance/tasks/main.yml
+
+- name: Include AWS vars
   include_vars: group_vars/aws_access_key
+
+- name: Gather EC2 facts
   ec2_instance_facts:
     region: "{{ region }}"
     filters:
@@ -7,10 +12,8 @@
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
   register: ec2
-- debug: var=ec2
 
 - name: Terminate EC2 Instance(s)
-  include_vars: group_vars/aws_access_key
   ec2:
     instance_ids: '{{ item.instance_id }}'
     state: absent
