@@ -5,7 +5,7 @@
   connection: local
   gather_facts: no
   roles:
-    - role: terminateInstance
+    - role: terminateInstances
 
 - hosts: localhost
   connection: local
