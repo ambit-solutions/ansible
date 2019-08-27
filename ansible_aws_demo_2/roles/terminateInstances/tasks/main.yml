@@ -1,5 +1,5 @@
 ---
-# roles/terminateInstance/tasks/main.yml
+# roles/terminateInstances/tasks/main.yml
 
 - name: Include AWS vars
   include_vars: group_vars/aws_access_key

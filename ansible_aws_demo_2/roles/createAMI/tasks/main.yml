@@ -8,7 +8,7 @@
 - name: Create AMI
   ec2_ami:
     region: "{{ region }}"
-    instance_id: "{{ ec2_instance_id }}"
+    instance_id: "{{ ec2_instances[0].id }}"
     name: "webapp-{{ tstamp.stdout }}"
     wait: yes
     state: present
