@@ -9,9 +9,6 @@ Alternative is "PPA" which is personal package from NodeSource the nodejs vendor
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install nodejs
 
-Added ignore_errors to NPM install because despite dependency failures it installs ok
+When launching AMI manually everything but pm2 startup ok and pm2 startup ok manual
 
-## CURRENT 
-fatal: [localhost]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'ec2_instance_id' is undefined\n\nThe error appears to have been in '/opt/cloud/git/repos/ansible/ansible_aws_demo_2/roles/createAMI/tasks/main.yml': line 8, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Create AMI\n  ^ here\n"}
-
-Check ec2 out and try "{{ ec2_instance_id }}"
+When launching AMI for ASG using lanch.yml no pm2 installed
