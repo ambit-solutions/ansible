@@ -14,7 +14,7 @@
       ping_port: 80
       ping_path: "/"
       response_timeout: 10
-      interval: 30
-      unhealthy_threshold: 6
+      interval: 60
+      unhealthy_threshold: 10
       healthy_threshold: 2
   register: elb_result
