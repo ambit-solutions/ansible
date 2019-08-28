@@ -3,7 +3,8 @@
 - name: gather facts about an AMI with AMI Name webapp
   ec2_ami_find:
     region: "{{ region }}"
-    name: "webapp-*"
+    #name: "webapp-*"
+    name: "{{ name }}"
     sort: name
   register: existing_amis
 

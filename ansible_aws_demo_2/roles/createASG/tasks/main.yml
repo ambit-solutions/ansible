@@ -7,21 +7,27 @@
     asg_properties: "{{ (asg_properties_result.stdout | from_json).AutoScalingGroups[0] }}"
   when: (asg_properties_result.stdout | from_json).AutoScalingGroups | count
 
+- name: Set fact for asg_name
+  set_fact:
+    asg_name: "{{ name | regex_replace('_','-') }}-asg-{{ timestamp }}"
+
 - name: Configure Auto Scaling Group and perform rolling deploy
   ec2_asg:
     region: "{{ region }}"
-    name: webapp
-    launch_config_name: webapp
+    name: "{{ asg_name }}"
+    launch_config_name: "{{ lc_name }}"
     availability_zones: "{{ zone }}"
     health_check_type: ELB
     health_check_period: 300
-    desired_capacity: "{{ asg_properties.DesiredCapacity | default(2) }}"
+    #desired_capacity: "{{ asg_properties.DesiredCapacity | default(2) }}"
+    desired_capacity: 2
     replace_all_instances: yes
-    replace_batch_size: "{{ (asg_properties.DesiredCapacity | default(2) / 4) | round(0, 'ceil') | int }}"
+    #replace_batch_size: "{{ (asg_properties.DesiredCapacity | default(2) / 4) | round(0, 'ceil') | int }}"
+    replace_batch_size: "{{ (2 / 4) | round(0, 'ceil') | int }}"
     min_size: 2
     max_size: 10
     load_balancers:
-      - webapp
+      - "{{ elb_name }}"
     state: present
   register: asg_result
 
@@ -29,7 +35,7 @@
   ec2_scaling_policy:
     region: "{{ region }}"
     name: "{{ item.name }}"
-    asg_name: webapp
+    asg_name: "{{ name | regex_replace('_','-') }}-asg-{{ timestamp }}"
     state: present
     adjustment_type: "{{ item.adjustment_type }}"
     min_adjustment_step: "{{ item.min_adjustment_step }}"

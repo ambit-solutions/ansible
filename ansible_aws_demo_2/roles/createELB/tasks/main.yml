@@ -1,7 +1,7 @@
 - name: Configure Elastic Load Balancers
   ec2_elb_lb:
     region: "{{ region }}"
-    name: webapp
+    name: "{{ elb_name }}"
     state: present
     zones: "{{ zone }}"
     connection_draining_timeout: 60

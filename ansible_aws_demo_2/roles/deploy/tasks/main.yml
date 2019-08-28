@@ -14,16 +14,22 @@
 
 - name: Create www directory
   file:
-    path: /home/ubuntu/www
+    path: /home/ubuntu/www/webapp
     owner: ubuntu
     group: ubuntu
     state: directory
 
-- name: Clone repository
-  git:
-    repo: "https://github.com/atplanet/hello-world-express-app.git"
-    dest: /home/ubuntu/www/webapp
-    version: master
+#- name: Clone repository
+#  git:
+#    repo: "https://github.com/atplanet/hello-world-express-app.git"
+#    dest: /home/ubuntu/www/webapp
+#    version: master
+
+- name: Upload nodejs code
+  copy:
+    src: app.js
+    dest: /home/ubuntu/www/webapp/app.js
+    mode: 0775
 
 - name: Curl NodeSource repo
   shell: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -

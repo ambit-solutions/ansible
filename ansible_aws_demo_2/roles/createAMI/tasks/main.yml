@@ -1,15 +1,11 @@
 ---
 # roles/createAMI/tasks/main.yml
 
-- name: Get timestamp from the system
-  shell: "date +%d%m%Y-%H%M%S"
-  register: tstamp
-
 - name: Create AMI
   ec2_ami:
     region: "{{ region }}"
-    instance_id: "{{ ec2_instances[0].id }}"
-    name: "webapp-{{ tstamp.stdout }}"
+    instance_id: "{{ ec2_instance_id }}"
+    name: "{{ ami_name }}"
     wait: yes
     state: present
   register: ami

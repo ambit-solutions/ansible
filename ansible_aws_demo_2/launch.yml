@@ -1,0 +1,39 @@
+---
+# Launch to crate AMI frrom passed ec2_instance_id and then LC/ELB/ASG cluster setup
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  pre_tasks:
+    - name: Get timestamp from the system
+      #shell: "date +%d%m%Y%H%M%S"
+      shell: "date +%d%m%H%M"
+      register: tstamp
+
+    - name: Set timestamp fact
+      set_fact:
+        timestamp: "{{ tstamp.stdout }}"
+
+    - name: Set AMI name
+      set_fact:
+        ami_name: "{{ name | regex_replace('_','-') }}-ami-{{ timestamp }}"
+
+    - name: Set LC name
+      set_fact:
+        lc_name: "{{ name | regex_replace('_','-') }}-lc-{{ timestamp }}"
+
+    - name: Set ELB name
+      set_fact:
+        elb_name: "{{ name | regex_replace('_','-') }}-elb-{{ timestamp }}"
+
+    - name: Set ASG name
+      set_fact:
+        asg_name: "{{ name | regex_replace('_','-') }}-asg-{{ timestamp }}"
+
+  roles:
+    - createAMI
+    - createLC
+    - createELB
+    - createASG
+

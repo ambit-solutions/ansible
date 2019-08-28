@@ -22,8 +22,10 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  roles:
-    - createAMI
-    - createLC
-    - createELB
-    - createASG
+  tasks:
+    - debug:
+      msg: "{{ ec2_instance }}"
+
+    - name: Check HTTP status code
+      uri:
+        url: http://{{ ec2_instance.public_dns_name }}:80/
