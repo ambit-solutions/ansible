@@ -12,3 +12,7 @@ sudo apt-get install nodejs
 When launching AMI manually everything but pm2 startup ok and pm2 startup ok manual
 
 When launching AMI for ASG using lanch.yml no pm2 installed
+
+PM2/node shutdown when AMI created. Requires systemd setup so added roles/deploy/files/node-app.service for upload to /etc/system/system and requires commands $(sudo systemctl node-app) $(sudo systemctl enable node-app) to enable.
+
+https://www.shellhacks.com/systemd-service-file-example
