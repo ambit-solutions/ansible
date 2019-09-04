@@ -80,5 +80,12 @@
   command: sudo systemctl enable node-app
   become: yes
 
+- name: Enable and start node-app
+  service:
+    name: node-app
+    enabled: yes
+    state: restarted
+  become: yes
+
 #- name: Start pm2
 #  command: pm2 start /home/ubuntu/www/webapp/app.js --name node-app
