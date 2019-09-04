@@ -4,7 +4,6 @@ Description=PM2 node.js app
 [Service]
 Type=simple
 ExecStart=/usr/bin/pm2 start /home/ubuntu/www/webapp/app.js --name node-app
-ExecStop=/usr/bin/pm2 stop node-app
 User=ubuntu
 Group=ubuntu
 
