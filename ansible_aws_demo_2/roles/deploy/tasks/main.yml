@@ -69,10 +69,16 @@
   become: yes
 
 - name: Reload systemctl
-  command: sudo systemctl daemon-reload
+  command: systemctl daemon-reload
+  become: yes
 
 - name: Start node-app service
-  command: sudo systemctl start node-app
+  command: systemctl start node-app
+  become: yes
+
+- name: Enable node-app service
+  command: sudo systemctl enable node-app
+  become: yes
 
 #- name: Start pm2
 #  command: pm2 start /home/ubuntu/www/webapp/app.js --name node-app
