@@ -1,11 +1,10 @@
 [Unit]
 Description=PM2 node.js app
+After=network.target
 
 [Service]
-Type=simple
+Type=forking
 ExecStart=/usr/bin/pm2 start /home/ubuntu/www/webapp/app.js --name node-app
-User=ubuntu
-Group=ubuntu
 
 [Install]
 WantedBy=multi-user.target
