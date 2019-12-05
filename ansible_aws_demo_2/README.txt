@@ -13,11 +13,10 @@ https://www.shellhacks.com/systemd-service-file-example
 
 added pm2 start node-app as systemd service. journalctl shows startup and node-app online but no pm2 or node processes when SSH
 
-it seems then like running remote commands means that systemctl start node-app works but session ended so service ended
-
-eveident because node-app doesn't survive reboot
-
-trying then to ensure systemctl enable is effective - but command won't run even manually - 
+Seems like systemctl "enable" (after start) isn't completing but node-app does persist manual reboot.
 
 TASK [deploy : Enable and start node-app] ***************************************************************************************************
 fatal: [ec2-18-217-69-123.us-east-2.compute.amazonaws.com]: FAILED! => {"changed": false, "msg": "Unable to enable service node-app: Failed to execute operation: Invalid argument\n"}
+
+Issue then is that ASG creates cluster from LC using AMI based on that instance but the ASG probe detects service down on HTTP 8000 and terminates that instance while starting up a new one. 
+

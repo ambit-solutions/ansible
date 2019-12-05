@@ -61,22 +61,18 @@
   command: pm2 delete ws-node
   ignore_errors: yes
 
-- name: Upload node-app service config
-  copy:
-    src: node-app.service
-    dest: /etc/systemd/system/multi-user.target.wants/node-app.service
-    mode: 0755
-  become: yes
+#- name: Upload node-app service config
+#  copy:
+#    src: node-app.service
+#    dest: /etc/systemd/system/multi-user.target.wants/node-app.service
+#    mode: 0755
+#  become: yes
 
 - name: Upload node-app service config
   copy:
     src: node-app.service
     dest: /lib/systemd/system/node-app.service
     mode: 0755
-  become: yes
-
-- name: Reload systemctl
-  command: systemctl daemon-reload
   become: yes
 
 - name: Start node-app service
@@ -87,11 +83,14 @@
 #  command: sudo systemctl enable node-app
 #  become: yes
 
-- name: Enable and start node-app
+- name: Reload systemctl
+  command: systemctl daemon-reload
+  become: yes
+
+- name: Enable node-app
   service:
     name: node-app
     enabled: yes
-    state: restarted
   become: yes
 
 #- name: Start pm2

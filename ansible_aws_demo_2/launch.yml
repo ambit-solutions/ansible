@@ -33,7 +33,7 @@
 
   roles:
     - createAMI
-    - createLC
-    - createELB
-    - createASG
+#    - createLC
+#    - createELB
+#    - createASG
 
